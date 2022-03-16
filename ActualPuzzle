@@ -1,0 +1,22 @@
+board = []
+
+board_dim = input('Enter dimensions: ')
+board_dim = board_dim.split()
+
+indeksik = 0
+for i in board_dim:
+    board_dim[indeksik] = int(i)
+    indeksik += 1
+
+for rows in range(board_dim[1]):
+    board.append([])
+
+for columns in board:
+    
+    for columns1 in range(board_dim[0]):
+        print(column)
+        board[column].append('_')
+        column += 1
+printing = 0
+for x in board:
+    print(x)
