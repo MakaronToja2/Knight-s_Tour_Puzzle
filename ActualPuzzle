@@ -1,22 +1,56 @@
 board = []
-
-board_dim = input('Enter dimensions: ')
-board_dim = board_dim.split()
-
 indeksik = 0
-for i in board_dim:
-    board_dim[indeksik] = int(i)
-    indeksik += 1
+s_position_index = 0
+k_position_index = 0
+while True:
+    board_dim = input('Enter dimensions: ')
+    board_dim = board_dim.split()
+    starting_position = input("Enter the knight's starting position: ")
+    starting_position = starting_position.split()
+    #check if input is right
+    if board_dim[0].isdigit() == True and board_dim[1].isdigit() == True:
+        if len(board_dim) == 2:
+            #Changing to integer
+            for i in board_dim:
+                board_dim[indeksik] = int(i)
+                indeksik += 1
+            if board_dim[0] > 0 and board_dim[1] > 0:
+                #Creating rows
+                for _ in range(board_dim[1]):
+                    board.append([])
+                #creating columns
+                columna = 0
+                for columns in board:
+                    columna +=1
+                    for i in range(board_dim[0]):
+                        columns.append("__ ")
+                # Initializaing knight's position
+                for position in starting_position:
+                    starting_position[s_position_index] = int(position)
+                    s_position_index += 1
+                #Sutiing knight's position for board
+                index_column = starting_position[0] - 1
+                index_row = board_dim[0] - starting_position[1]
+                for k_position in board:
+                    if k_position_index == index_column:
+                        print('Mamy to')
+                        board[index_row][index_column] = ' X '
+                        break
+                    k_position_index += 1
 
-for rows in range(board_dim[1]):
-    board.append([])
 
-for columns in board:
-    
-    for columns1 in range(board_dim[0]):
-        print(column)
-        board[column].append('_')
-        column += 1
-printing = 0
-for x in board:
-    print(x)
+                #printing board
+                countdown = board_dim[1]
+                for x in board:
+                    print(countdown,'|',''.join(x),'|')
+                    countdown -= 1
+                break
+            else:
+                print('Invalid dimensions!')
+                continue
+        else:
+            print('Invalid dimensions!')
+            continue
+    else:
+        print('Invalid dimensions!')
+        continue
