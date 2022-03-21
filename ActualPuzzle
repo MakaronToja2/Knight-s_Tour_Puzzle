@@ -1,50 +1,76 @@
 board = []
-indeksik = 0
-s_position_index = 0
+
 k_position_index = 0
 while True:
     board_dim = input('Enter dimensions: ')
     board_dim = board_dim.split()
-    starting_position = input("Enter the knight's starting position: ")
-    starting_position = starting_position.split()
-    #check if input is right
-    if board_dim[0].isdigit() == True and board_dim[1].isdigit() == True:
-        if len(board_dim) == 2:
+    #check if input is righ
+    if len(board_dim) == 2:
+        if board_dim[0].isdigit() == True and board_dim[1].isdigit() == True:
             #Changing to integer
+            indeksik = 0
             for i in board_dim:
                 board_dim[indeksik] = int(i)
                 indeksik += 1
+            cells_num = board_dim[0] * board_dim[1]
+            cells_num = len(str(cells_num))
+            if board_dim[1] < 5:
+                print('Invalid dimensions!')
+                continue
             if board_dim[0] > 0 and board_dim[1] > 0:
+                while True:
+                    starting_position = input("Enter the knight's starting position: ")
+                    starting_position = starting_position.split()
+                    s_position_index = 0
+                    # Initializaing knight's position
+                    for position in starting_position:
+                        starting_position[s_position_index] = int(position)
+                        s_position_index += 1
+                    if starting_position[0] > board_dim[0] and starting_position[1] > board_dim[1]:
+                        print('Invalid dimensions!')
+                    else:
+                        break
                 #Creating rows
                 for _ in range(board_dim[1]):
                     board.append([])
                 #creating columns
                 columna = 0
+                formating = ('_'*cells_num + ' ')
                 for columns in board:
                     columna +=1
                     for i in range(board_dim[0]):
-                        columns.append("__ ")
-                # Initializaing knight's position
-                for position in starting_position:
-                    starting_position[s_position_index] = int(position)
-                    s_position_index += 1
+                        columns.append(formating)
                 #Sutiing knight's position for board
                 index_column = starting_position[0] - 1
-                index_row = board_dim[0] - starting_position[1]
+                index_row = board_dim[1] - starting_position[1]
+                format2 = (' ' * (cells_num - 1))
                 for k_position in board:
                     if k_position_index == index_column:
-                        print('Mamy to')
-                        board[index_row][index_column] = ' X '
+                        board[index_row][index_column] = format2 + 'X '
                         break
                     k_position_index += 1
-
-
                 #printing board
                 countdown = board_dim[1]
+                countdown_len = len(str(countdown))
+                borders = board_dim[0] * (cells_num + 1) + 4
+                print((' ' *(countdown_len)),borders*('-'))
+                countdown_down = []
                 for x in board:
-                    print(countdown,'|',''.join(x),'|')
-                    countdown -= 1
+                    countdown_down.append(countdown)
+                    if board_dim[0] >= 10 or board_dim[1] >= 10:
+                        if countdown >= 10:
+                            print(countdown, '|', ''.join(x), '|')
+                            countdown -= 1
+                        else:
+                            print('',countdown, '|', ''.join(x), '|')
+                            countdown -= 1
+
+                    else:
+                        print(countdown,'|',''.join(x),'|')
+                        countdown -= 1
+                print((' ' * (countdown_len)), borders * ('-'), countdown_down)
                 break
+
             else:
                 print('Invalid dimensions!')
                 continue
